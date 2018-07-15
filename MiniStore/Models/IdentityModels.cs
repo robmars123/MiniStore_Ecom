@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Business.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -21,7 +22,7 @@ namespace MiniStore.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DataContext", throwIfV1Schema: false)
         {
         }
 
@@ -29,5 +30,6 @@ namespace MiniStore.Models
         {
             return new ApplicationDbContext();
         }
+
     }
 }

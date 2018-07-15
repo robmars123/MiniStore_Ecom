@@ -1,0 +1,187 @@
+﻿@model Business.ViewModels.ProductViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+<link href="~/Content/products-content/product-page.css" rel="stylesheet" />
+<h2>Details</h2>
+<div class="container">
+    <hr>
+    <div class="card">
+        <div class="row">
+            <aside class="col-sm-5 border-right">
+                <article class="gallery-wrap">
+                    <div class="img-small-wrap">
+                        @if (Model.Product.productImages.Count != 0)
+                        {
+                            <div> <a href="#"><img src="@Model.PrimaryProduct_Image.ConvertedProductImage" style=""></a></div>
+                        }
+                    </div> <!-- slider-product.// -->
+                    <div class="img-small-wrap">
+                        @* Loop images per product *@
+                        @if (Model.Product.productImages.Count != 0)
+                        {
+                            foreach (var image in Model.Product.productImages)
+                            {
+                                <div class="item-gallery">
+
+                                    <img src="@image.ConvertedProductImage" id="myImg" />
+
+                                </div>
+                            }
+                        }
+                    </div> <!-- slider-nav.// -->
+                </article> <!-- gallery-wrap .end// -->
+            </aside>
+            <aside class="col-sm-7">
+                <article class="card-body p-5">
+                    <h3 class="title mb-3">@Html.DisplayFor(Model => Model.Product.Product_Name)</h3>
+                    <p class="price-detail-wrap">
+                        <span class="price h3 text-warning">
+                            <span class="currency">US $</span><span class="num">@Html.DisplayFor(Model => Model.Product.Price)</span>
+                        </span>
+                    </p> <!-- price-detail-wrap .// -->
+                    <dl class="item-property">
+                        <dt>Description</dt>
+                        <dd>
+                            <p>
+                                @Html.DisplayFor(Model => Model.Product.Description)
+                            </p>
+                        </dd>
+                    </dl>
+                    <dl class="param param-feature">
+                        @*<dt>Model#</dt>
+                        <dd>12345611</dd>*@
+                    </dl>  <!-- item-property-hor .// -->
+                    <dl class="param param-feature">
+                        <dt>Color</dt>
+                        <dd>Black and white</dd>
+                    </dl>  <!-- item-property-hor .// -->
+                    <dl class="param param-feature">
+                        <dt>Delivery</dt>
+                        <dd>Russia, USA, and Europe</dd>
+                    </dl>  <!-- item-property-hor .// -->
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <dl class="param param-inline">
+                                <dt>Quantity: </dt>
+                                <dd>
+                                    <select class="form-control form-control-sm" style="width:70px;">
+                                        <option> 1 </option>
+                                        <option> 2 </option>
+                                        <option> 3 </option>
+                                    </select>
+                                </dd>
+                            </dl>  <!-- item-property .// -->
+                        </div> <!-- col.// -->
+                        <div class="col-sm-7">
+                            <dl class="param param-inline">
+                                <dt>Size: </dt>
+                                <dd>
+                                    <label class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <span class="form-check-label">SM</span>
+                                    </label>
+                                    <label class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <span class="form-check-label">MD</span>
+                                    </label>
+                                    <label class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <span class="form-check-label">XXL</span>
+                                    </label>
+                                </dd>
+                            </dl>  <!-- item-property .// -->
+                        </div> <!-- col.// -->
+                    </div> <!-- row.// -->
+                    <hr>
+                    <a href="#" class="btn btn-lg btn-primary text-uppercase"> Buy now </a>
+                    <a href="#" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> Add to cart </a>
+                </article> <!-- card-body.// -->
+            </aside> <!-- col.// -->
+        </div> <!-- row.// -->
+    </div> <!-- card.// -->
+
+</div>
+<!--container.//-->
+
+<br><br><br>
+<article class="bg-secondary mb-3">
+    <div class="card-body text-center">
+        <h4 class="text-white">HTML UI KIT <br> Ready to use Bootstrap 4 components and templates </h4>
+        <p class="h5 text-white">
+            for Ecommerce, marketplace, booking websites
+            and product landing pages
+        </p>   <br>
+        <p>
+            <a class="btn btn-warning" target="_blank" href="http://bootstrap-ecommerce.com/">
+                Bootstrap-ecommerce.com
+                <i class="fa fa-window-restore "></i>
+            </a>
+        </p>
+    </div>
+    <br><br><br>
+</article>
+
+
+
+
+@*<div>
+        <h4>Product</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Product_Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Product_Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Category_Id)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category_Id)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Date_Added)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Date_Added)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Date_Modified)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Date_Modified)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Date_Removed)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Date_Removed)
+            </dd>
+
+        </dl>
+    </div>*@
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Product.Product_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

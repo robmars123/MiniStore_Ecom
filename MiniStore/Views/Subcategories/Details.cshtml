@@ -1,0 +1,26 @@
+﻿@model Business.Entities.Subcategory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Subcategory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Subcategory_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subcategory_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Subcategory_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
