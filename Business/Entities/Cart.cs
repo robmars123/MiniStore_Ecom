@@ -7,9 +7,14 @@ using System.Web;
 
 namespace Business.Entities
 {
-    [Table("Cart")]
+    [Table("Carts")]
     public class Cart
     {
+        public Cart()
+        {
+            this.Quantity = 1;
+            this.Status = 1;
+        }
         [Key]
         public int Cart_Id { get; set; }
         public int Product_Id { get; set; }
@@ -17,5 +22,9 @@ namespace Business.Entities
         public int Quantity { get; set; }
         public string Product_Description { get; set; }
         public string Product_Name { get; set; }
+        [ForeignKey("Product_Id")]
+        public virtual Product Product { get; set; }
+        public string User_Id { get; set; }
+        public int Status { get; set; }
     }
 }

@@ -36,8 +36,6 @@ namespace Business.Entities
 
         [Column(TypeName = "date")]
         public DateTime? Date_Removed { get; set; }
-        //[ForeignKey("Product_Id")]
-        //public ProductImage PrimaryProduct_Image { get; set; }
         [ForeignKey("Product_Id")]
         public virtual List<ProductImage> productImages { get; set; }
         public virtual Category Categories { get; set; }

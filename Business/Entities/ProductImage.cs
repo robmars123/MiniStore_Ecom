@@ -17,5 +17,6 @@ namespace Business.Entities
         public byte[] Image { get; set; }
         [NotMapped]
         public string ConvertedProductImage { get; set; }
+
     }
 }

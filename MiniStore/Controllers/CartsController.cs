@@ -6,33 +6,45 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Business.DataService;
 using Business.Entities;
+using Business.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace MiniStore.Controllers
 {
     public class CartsController : Controller
     {
-        private DataContext db = new DataContext();
-
+        private CartDataService _cartDataService = new CartDataService();
+        private CartViewModel _cartProductList = new CartViewModel();
+        private static string _userID;
         // GET: Carts
         public ActionResult Index()
         {
-            return View(db.Carts.ToList());
+            GetUserID(out _userID);
+            _cartProductList.CartProducts = _cartDataService.GetAddedCartProducts(_userID);
+            PrimaryProductImage(_cartProductList);
+            return View(_cartProductList);
         }
-
-        // GET: Carts/Details/5
-        public ActionResult Details(int? id)
+        private void PrimaryProductImage(CartViewModel _cartProductList)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cart cart = db.Carts.Find(id);
-            if (cart == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cart);
+            _cartProductList.CartProducts.ForEach(item =>
+           _cartProductList.PrimaryProduct_Image = _cartDataService.GetImages(item.Product_Id).FirstOrDefault()
+           );
+        }
+        public void GetUserID(out string userID)
+        {
+            _userID = User.Identity.GetUserId(); //logged in User
+            //userID = null;
+            //if no loggedIn user, grab sessionID - loggedIn_User will be null.
+            //get sessionID and save as userID - unregistered users
+            userID = (_userID != null) ? userID = _userID : HttpContext.Session.SessionID;
+        }
+        public ActionResult Add(ProductViewModel _product)
+        {
+            GetUserID(out _userID);
+            _cartDataService.AddProductToCart(_product, _userID);
+            return RedirectToAction("Index", "Carts");
         }
 
         // GET: Carts/Create
@@ -41,17 +53,14 @@ namespace MiniStore.Controllers
             return View();
         }
 
-        // POST: Carts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Cart_Id,Product_Id,UnitPrice,Quantity,Product_Description,Product_Name")] Cart cart)
+        public ActionResult Create(Cart cart)
         {
             if (ModelState.IsValid)
             {
-                db.Carts.Add(cart);
-                db.SaveChanges();
+                //db.Carts.Add(cart);
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -65,53 +74,40 @@ namespace MiniStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cart cart = db.Carts.Find(id);
-            if (cart == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cart);
+            return View();
         }
 
-        // POST: Carts/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Cart_Id,Product_Id,UnitPrice,Quantity,Product_Description,Product_Name")] Cart cart)
+        public ActionResult Update(FormCollection cartForm, int id)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cart).State = EntityState.Modified;
-                db.SaveChanges();
+                Cart cartItem = new Cart();
+                var quantity = cartForm.GetValues("item.Quantity").FirstOrDefault();
+                cartItem.Quantity = Convert.ToInt32(quantity);
+                _cartDataService.Update(cartItem, id);
                 return RedirectToAction("Index");
             }
-            return View(cart);
+            return View();
         }
 
         // GET: Carts/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Remove(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cart cart = db.Carts.Find(id);
-            if (cart == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cart);
+            return View();
         }
 
         // POST: Carts/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Remove")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Cart cart = db.Carts.Find(id);
-            db.Carts.Remove(cart);
-            db.SaveChanges();
+            _cartDataService.Remove(id);
             return RedirectToAction("Index");
         }
 
@@ -119,7 +115,7 @@ namespace MiniStore.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                //db.Dispose();
             }
             base.Dispose(disposing);
         }

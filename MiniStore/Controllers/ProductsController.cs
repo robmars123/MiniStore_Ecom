@@ -24,33 +24,32 @@ namespace MiniStore.Controllers
             //Get products
             _productList.productList = _productDataSerice.GetProducts();
             //Get product primary image
-            _productList.productList.ForEach(item =>
-            _productList.PrimaryProduct_Image = _productDataSerice.GetImages(item.Product_Id).FirstOrDefault()
-            );
+            PrimaryProductImage(_productList);
             return View(_productList);
         }
         public ActionResult Men()
         {
             _productList.productList = _productDataSerice.Men();
-            _productList.productList.ForEach(item =>
-            _productList.PrimaryProduct_Image = _productDataSerice.GetImages(item.Product_Id).FirstOrDefault()
-            );
+            PrimaryProductImage(_productList);
             return View(_productList);
         }
         public ActionResult Women()
         {
             _productList.productList = _productDataSerice.Women();
-            _productList.productList.ForEach(item =>
-            _productList.PrimaryProduct_Image = _productDataSerice.GetImages(item.Product_Id).FirstOrDefault()
-            );
+            PrimaryProductImage(_productList);
             return View(_productList);
+        }
+        //For Details Page Only - loop through each product and get their primary image
+        private void PrimaryProductImage(ProductViewModel _productList)
+        {
+            _productList.productList.ForEach(item =>
+           _productList.PrimaryProduct_Image = _productDataSerice.GetImages(item.Product_Id).FirstOrDefault()
+           );
         }
         public ActionResult Kids()
         {
             _productList.productList = _productDataSerice.Kids();
-            _productList.productList.ForEach(item =>
-            _productList.PrimaryProduct_Image = _productDataSerice.GetImages(item.Product_Id).FirstOrDefault()
-            );
+            PrimaryProductImage(_productList);
             return View(_productList);
         }
         // GET: Products/Details/5
@@ -59,6 +58,7 @@ namespace MiniStore.Controllers
             _productList.Product = _productDataSerice.GetProductDetails(id);
             _productList.PrimaryProduct_Image = _productDataSerice.GetImages((int)id).FirstOrDefault();
             _productList.Product.productImages = _productDataSerice.GetImages((int)id);
+            Session["ProductSession"] = _productList;
             return View(_productList);
         }
 
@@ -99,7 +99,7 @@ namespace MiniStore.Controllers
             if (ModelState.IsValid)
             {
                 string imageCode = "";
-                FileUpload(img, file);
+                if(file != null) FileUpload(img, file);
                 _productDataSerice.UpdateProduct(product);
                 _productDataSerice.GetImages(product.Product_Id);
 

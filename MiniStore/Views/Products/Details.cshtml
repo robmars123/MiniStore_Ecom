@@ -4,41 +4,56 @@
     ViewBag.Title = "Details";
 }
 <link href="~/Content/products-content/product-page.css" rel="stylesheet" />
-<h2>Details</h2>
-<div class="container">
-    <hr>
-    <div class="card">
-        <div class="row">
-            <aside class="col-sm-5 border-right">
-                <article class="gallery-wrap">
-                    <div class="img-small-wrap">
-                        @if (Model.Product.productImages.Count != 0)
-                        {
-                            <div> <a href="#"><img src="@Model.PrimaryProduct_Image.ConvertedProductImage" style=""></a></div>
-                        }
-                    </div> <!-- slider-product.// -->
-                    <div class="img-small-wrap">
-                        @* Loop images per product *@
-                        @if (Model.Product.productImages.Count != 0)
-                        {
-                            foreach (var image in Model.Product.productImages)
+
+@using (Html.BeginForm("Add", "Carts", null, FormMethod.Post,
+                            null))
+{
+    <div class="container">
+        <hr>
+        <div class="card">
+            <div class="row">
+                <aside class="col-sm-5 border-right">
+                    <article class="gallery-wrap">
+                        <div class="img-small-wrap">
+                            @if (Model.Product.productImages.Count != 0)
                             {
-                                <div class="item-gallery">
-
-                                    <img src="@image.ConvertedProductImage" id="myImg" />
-
+                                <div>
+                                    <a href="#">
+                                        <img src="@Model.PrimaryProduct_Image.ConvertedProductImage" style="">
+                                        @Html.HiddenFor(modelItem => Model.PrimaryProduct_Image.ConvertedProductImage)
+                                        @Html.HiddenFor(modelItem => Model.PrimaryProduct_Image.Image_Id)
+                                        @Html.HiddenFor(modelItem => Model.PrimaryProduct_Image.Product_Id)
+                                        @Html.HiddenFor(modelItem => Model.PrimaryProduct_Image.Image)
+                                    </a>
                                 </div>
                             }
-                        }
-                    </div> <!-- slider-nav.// -->
-                </article> <!-- gallery-wrap .end// -->
-            </aside>
-            <aside class="col-sm-7">
-                <article class="card-body p-5">
-                    <h3 class="title mb-3">@Html.DisplayFor(Model => Model.Product.Product_Name)</h3>
-                    <p class="price-detail-wrap">
-                        <span class="price h3 text-warning">
-                            <span class="currency">US $</span><span class="num">@Html.DisplayFor(Model => Model.Product.Price)</span>
+                        </div> <!-- slider-product.// -->
+                        <div class="img-small-wrap">
+                            @* Loop images per product *@
+                            @if (Model.Product.productImages.Count != 0)
+                            {
+                                foreach (var image in Model.Product.productImages)
+                                {
+                                    <div class="item-gallery">
+
+                                        <img src="@image.ConvertedProductImage" id="myImg" />
+                                        @Html.HiddenFor(Model => image.ConvertedProductImage)
+                                    </div>
+                                }
+                            }
+                        </div> <!-- slider-nav.// -->
+                    </article> <!-- gallery-wrap .end// -->
+                </aside>
+                <aside class="col-sm-7">
+                    <article class="card-body p-5">
+                        <h3 class="title mb-3">@Html.DisplayFor(Model => Model.Product.Product_Name)</h3>
+                        @Html.HiddenFor(Model => Model.Product.Product_Name)
+                        <p class="price-detail-wrap">
+                            <span class="price h3 text-warning">
+                                <span class="currency">US $</span><span class="num">
+                                    @Html.DisplayFor(Model => Model.Product.Price)
+                                @Html.HiddenFor(Model => Model.Product.Price)
+                            </span>
                         </span>
                     </p> <!-- price-detail-wrap .// -->
                     <dl class="item-property">
@@ -46,12 +61,17 @@
                         <dd>
                             <p>
                                 @Html.DisplayFor(Model => Model.Product.Description)
+                                @Html.HiddenFor(Model => Model.Product.Description)
+                                @Html.HiddenFor(Model => Model.Product.Product_Id)
+                                @Html.HiddenFor(Model => Model.Product.Date_Added)
+                                @Html.HiddenFor(Model => Model.Product.Subcategory_Id)
+                                @Html.HiddenFor(Model => Model.Product.Category_Id)
                             </p>
                         </dd>
                     </dl>
                     <dl class="param param-feature">
                         @*<dt>Model#</dt>
-                        <dd>12345611</dd>*@
+                            <dd>12345611</dd>*@
                     </dl>  <!-- item-property-hor .// -->
                     <dl class="param param-feature">
                         <dt>Color</dt>
@@ -67,11 +87,13 @@
                             <dl class="param param-inline">
                                 <dt>Quantity: </dt>
                                 <dd>
-                                    <select class="form-control form-control-sm" style="width:70px;">
-                                        <option> 1 </option>
-                                        <option> 2 </option>
-                                        <option> 3 </option>
-                                    </select>
+                                    @Html.TextBoxFor(modelItem => Model.Product.QuantityPerUnit, new { @style = "width: 50px", @class = "form-control", name = "Quantity" })
+                                    @Html.HiddenFor(modelItem => Model.Product.QuantityPerUnit)
+                                    @*<select class="form-control form-control-sm" style="width:70px;">
+                                            <option> 1 </option>
+                                            <option> 2 </option>
+                                            <option> 3 </option>
+                                        </select>*@
                                 </dd>
                             </dl>  <!-- item-property .// -->
                         </div> <!-- col.// -->
@@ -97,7 +119,8 @@
                     </div> <!-- row.// -->
                     <hr>
                     <a href="#" class="btn btn-lg btn-primary text-uppercase"> Buy now </a>
-                    <a href="#" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> Add to cart </a>
+                    @*<a href="@Url.Action("Add", "Carts")" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> Add to cart </a>*@
+                    <input type="submit" name="btn" value="Add to Cart" class="btn btn-lg btn-outline-primary text-uppercase" />
                 </article> <!-- card-body.// -->
             </aside> <!-- col.// -->
         </div> <!-- row.// -->
@@ -105,7 +128,7 @@
 
 </div>
 <!--container.//-->
-
+}
 <br><br><br>
 <article class="bg-secondary mb-3">
     <div class="card-body text-center">
@@ -123,64 +146,6 @@
     </div>
     <br><br><br>
 </article>
-
-
-
-
-@*<div>
-        <h4>Product</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Product_Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Product_Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Price)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Price)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Category_Id)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Category_Id)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Date_Added)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Date_Added)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Date_Modified)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Date_Modified)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Date_Removed)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Date_Removed)
-            </dd>
-
-        </dl>
-    </div>*@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Product.Product_Id }) |
     @Html.ActionLink("Back to List", "Index")

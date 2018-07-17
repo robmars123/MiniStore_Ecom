@@ -17,7 +17,7 @@ namespace Business.Entities
         public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<CartItem> CartItems { get; set; }
-    
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -27,9 +27,23 @@ namespace Business.Entities
             modelBuilder.Entity<Product>()
                 .HasKey(k => k.Product_Id);
 
+            //modelBuilder.Entity<Cart>()
+            //    .Property(k => k.Product_Id);
+
             modelBuilder.Entity<Product>()
-            .Property(b => b.Product_Id)
-            .HasDatabaseGeneratedOption( DatabaseGeneratedOption.Identity);
+                .Property(b => b.Product_Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+
+            //modelBuilder.Entity<ProductImage>()
+            //.HasRequired(c => c.product)
+            //.WithMany(i=>i.productImages)
+            //.Map(m => m.MapKey("Product_Id"));
+
+            //modelBuilder.Entity<Product>()
+            //.HasRequired(c => c.cart)
+            //.WithMany(i => i.products)
+            //.Map(m => m.MapKey("Product_Id"));
 
         }
     }
