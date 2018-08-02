@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Business.DataService;
 using Business.Entities;
+using Business.Enums;
 using Business.Interfaces;
 using Business.ViewModels;
 
@@ -29,13 +30,13 @@ namespace MiniStore.Controllers
         }
         public ActionResult Men()
         {
-            _productList.productList = _productDataSerice.Men();
+            _productList.productList = _productDataSerice.GetProductList((int)Categories.Men);
             PrimaryProductImage(_productList);
             return View(_productList);
         }
         public ActionResult Women()
         {
-            _productList.productList = _productDataSerice.Women();
+            _productList.productList = _productDataSerice.GetProductList((int)Categories.Women);
             PrimaryProductImage(_productList);
             return View(_productList);
         }
@@ -48,7 +49,7 @@ namespace MiniStore.Controllers
         }
         public ActionResult Kids()
         {
-            _productList.productList = _productDataSerice.Kids();
+            _productList.productList = _productDataSerice.GetProductList((int)Categories.Kids);
             PrimaryProductImage(_productList);
             return View(_productList);
         }

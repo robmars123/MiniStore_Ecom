@@ -153,7 +153,9 @@
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Enums\Categories.cs" />
     <Compile Include="Enums\Status.cs" />
+    <Compile Include="Extensions\Numeric.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
+    <Compile Include="Generics\ProductList.cs" />
     <Compile Include="Interfaces\IProductDataService.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,6 +1,8 @@
 ﻿using Business.Data;
 using Business.Entities;
 using Business.Enums;
+using Business.Extensions;
+using Business.Generics;
 using Business.Interfaces;
 using Business.ViewModels;
 using System;
@@ -15,54 +17,41 @@ namespace Business.DataService
     {
         ProductViewModel productVM = new ProductViewModel();
         //MEN - Navigation link
-        public List<Product> Men()
+        public List<Product> GetProductList(int catNumber)
         {
-             productVM.productList = db.Products.Where(p => p.Category_Id == (int)Categories.Men).Select(s => s).ToList();
-            return productVM.productList;
-        }
-
-        //Women - Navigation link
-        public List<Product> Women()
-        {
-            productVM.productList = db.Products.Where(p => p.Category_Id == (int)Categories.Women).Select(s => s).ToList();
-            return productVM.productList;
-        }
-
-        public List<Product> Kids()
-        {
-            productVM.productList = db.Products.Where(p => p.Category_Id == (int)Categories.Kids).Select(s => s).ToList();
+            if (catNumber == (int)Categories.Kids) catNumber = (int)Categories.Kids;
+            else if (catNumber == (int)Categories.Men) catNumber = (int)Categories.Men;
+            else if (catNumber == (int)Categories.Women) catNumber = (int)Categories.Women;
+            productVM.productList = ProductList.GetLists(db.Products.Where(p => p.Category_Id == catNumber).Select(s => s).ToList());
             return productVM.productList;
         }
 
         //Query - Get List
         public List<Product> GetProducts()
         {
-            productVM.productList = db.Products.ToList();
+            productVM.productList = ProductList.GetLists(db.Products.ToList());
             return productVM.productList;
         }
 
         public Product GetProductDetails(int? Id)
         {
-            Product product = db.Products.Find(Id);
-            return product;
+            return ProductList.GetItem(db.Products.Find(Id));
         }
 
         public List<Category> GetCategories()
         {
-            List<Category> categories = db.Categories.ToList();
-            return categories;
+            return ProductList.GetLists(db.Categories.ToList());
         }
 
         public List<Subcategory> GetSubCategories()
         {
-            List<Subcategory> SubCategories = db.Subcategories.ToList();
-            return SubCategories;
+            return ProductList.GetLists(db.Subcategories.ToList());
         }
 
         public List<ProductImage> GetImages(int productId)
         {
-            List<ProductImage> img = db.ProductImages.Where(x => x.Product_Id == productId).Select(y=>y).ToList();
-            foreach(var item in img)
+            List <ProductImage> img = db.ProductImages.Where(x => x.Product_Id == productId).Select(y => y).ToList();
+            foreach (var item in img)
             {
                 string imreBase64Data = Convert.ToBase64String(item.Image);
                 item.ConvertedProductImage = string.Format("data:image/png;base64,{0}", imreBase64Data);
@@ -89,7 +78,7 @@ namespace Business.DataService
                 db.Products.Add(product);
                 db.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string error = ex.InnerException.InnerException.ToString();
             }

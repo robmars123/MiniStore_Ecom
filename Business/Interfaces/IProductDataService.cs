@@ -11,9 +11,7 @@ namespace Business.Interfaces
 {
     public interface IProductDataService
     {
-        List<Product> Men();
-        List<Product> Women();
-        List<Product> Kids();
+        List<Product> GetProductList(int catNumber);
         List<Product> GetProducts();
         Product GetProductDetails(int? Id);
         List<Category> GetCategories();
