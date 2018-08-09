@@ -8,9 +8,10 @@
 
 
 $(".item-gallery img").click(function () {
-    window.alert("is clicked.");
-    var newSrc = $(this).attr('src');
-    var oldSrc = $(this).closest('div').hasClass(".product-image img").attr('src');
-    $("#my-primary-image").val = newSrc;
-    $('img[src="' + oldSrc + '"]').attr('src', newSrc);
+    var thumb = this;
+    var src = this.src;
+    $('.primary-img img').fadeOut(400, function () {
+       // thumb.src = this.src;
+        $(this).fadeIn(400)[0].src = src;
+    });
 })

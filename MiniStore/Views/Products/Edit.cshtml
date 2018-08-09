@@ -44,7 +44,7 @@
                 <div class="img-small-wrap">
                     @if (Model.Product.productImages.Count != 0)
                     {
-                        <div>
+                        <div class="primary-img">
                             <a href="#">
                                 <img src="@Model.PrimaryProduct_Image.ConvertedProductImage" class="product-image" id="my-primary-image">
                                 @Html.HiddenFor(modelItem => Model.PrimaryProduct_Image.ConvertedProductImage)
@@ -61,7 +61,7 @@
                     {
                         foreach (var image in Model.Product.productImages)
                         {
-                            <div class="item-gallery">
+                            <div class="item-gallery img-list">
 
                                 <img src="@image.ConvertedProductImage" id="myImg" />
                                 @Html.HiddenFor(Model => image.ConvertedProductImage)
