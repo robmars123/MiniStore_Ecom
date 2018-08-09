@@ -64,6 +64,12 @@ namespace Business.DataService
             }
             return img;
         }
+
+        public void AddCartItem(CartItem _orderSession)
+        {
+            db.CartItems.Add(_orderSession);
+            db.SaveChanges();
+        }
         public void Update(Cart cart, int id)
         {
             Cart cartItem = db.Carts.Find(id);
@@ -77,6 +83,31 @@ namespace Business.DataService
             Cart cart = db.Carts.Find(id);
             cart.Status = (int)Status.Removed;
             db.Entry(cart).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public void RemoveAllItems(string userID)
+        {
+            var cartItems = GetAddedCartProducts(userID);
+            foreach (var item in cartItems)
+            {
+                item.Status = (int)Status.Removed;
+                db.Entry(item).State = EntityState.Modified;
+            }
+            db.SaveChanges();
+        }
+        public List<CartItem> GetCartItems(string userID)
+        {
+            List<CartItem> cartItems = db.CartItems.Where(x => x.User_Id == userID).ToList();
+            return cartItems;
+        }
+        public void UpdateCartItems(List<CartItem> cartItems)
+        {
+            foreach (var item in cartItems)
+            {
+                item.Payment_Status = (int)Payment_Status.Paid;
+                db.Entry(item).State = EntityState.Modified;
+            }
             db.SaveChanges();
         }
     }

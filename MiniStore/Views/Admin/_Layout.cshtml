@@ -9,19 +9,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Admin_Dashboard/products-style.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    
 </head>
-<script src="~/Scripts/admin-dashboard.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 <link href="~/Content/Admin_Dashboard/admin-dashboard.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+
 <nav class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 navbar-expand-md">
     <div class="navbar-brand d-flex align-items-center justify-content-between col-sm-12 col-md-2 mr-0">
         <a class="mr-1 d-md-none text-light" href="#sidenav" data-toggle="collapse" data-target="#sidenav">
             <span data-feather="menu" class="my-1"></span>
         </a>
-        <a class="text-light" href="">Company</a>
+        <a class="text-light" href="">Hinley's</a>
         <a class="navbar-toggler border-0 p-0" href="#topnav" data-toggle="collapse" data-target="#topnav">
             <span data-feather="menu" class="my-1"></span>
         </a>
@@ -41,32 +43,32 @@
             <div class="sidebar-sticky flex-column w-100 mt-1">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link active" href="~/Admin/Dashboard">
                             <span data-feather="home"></span> Dashboard <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="~/Admin/Orders">
                             <span data-feather="file"></span> Orders
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="~/Admin/Products">
                             <span data-feather="shopping-cart"></span> Products
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="~/Admin/Dashboard">
                             <span data-feather="users"></span> Customers
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="~/Admin/Dashboard">
                             <span data-feather="bar-chart-2"></span> Reports
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="~/Admin/Dashboard">
                             <span data-feather="layers"></span> Integrations
                         </a>
                     </li>
@@ -102,10 +104,42 @@
             </div>
         </nav>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            
 
+            @RenderBody()
         </main>
     </div>
 </div>
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
+<script src="~/Scripts/admin-dashboard.js"></script>
+<script>
+    feather.replace();
+
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            datasets: [{
+                data: [15339, 21345, 18483, 24003, 23489, 24092, 26034],
+                lineTension: 0,
+                backgroundColor: 'transparent',
+                borderColor: '#007bff',
+                borderWidth: 4,
+                pointBackgroundColor: '#007bff'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: false
+                    }
+                }]
+            },
+            legend: {
+                display: false,
+            }
+        }
+    });
+</script>

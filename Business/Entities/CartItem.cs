@@ -10,10 +10,11 @@ namespace Business.Entities
     {
         [Key]
         public int CartItem_Id { get; set; }
-        public int Customer_Id { get; set; }
+        public string User_Id { get; set; }
         public int Cart_Id { get; set; }
         public int Product_Id { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
+        public int Payment_Status { get; set; }
     }
 }

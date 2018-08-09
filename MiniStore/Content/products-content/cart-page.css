@@ -50,3 +50,13 @@ var {
     max-height: 75px;
     object-fit: cover;
 }
+
+.cart-subtotal{
+    width: 150px;
+    padding-left: 55px;
+}
+.cart-shipping {
+    font-style: italic;
+    font-size: 0.875em;
+    padding: 18px 0 20px;
+}

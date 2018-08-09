@@ -7,6 +7,7 @@ namespace Business.Entities
 
     public partial class DataContext : DbContext
     {
+
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
@@ -18,9 +19,9 @@ namespace Business.Entities
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<CartItem> CartItems { get; set; }
 
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             //modelBuilder.Entity<Product>()
             //    .Property(e => e.Price)
             //    .HasPrecision(18, 0);

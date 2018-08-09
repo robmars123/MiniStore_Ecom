@@ -1,0 +1,34 @@
+﻿@model Business.ViewModels.AdminViewModel
+@{
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+<h3 class="text-left">Orders</h3>
+<div class="table-responsive-lg">
+    <table class="table table-borderless">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => Model.Order.Order_Id)</th>
+                <th>@Html.DisplayNameFor(model => Model.Order.Order_Date)</th>
+                <th>@Html.DisplayNameFor(model => Model.Order.Customer.FullName)</th>
+                <th>@Html.DisplayNameFor(model => Model.Order.Payment_Status)</th>
+                <th>@Html.DisplayNameFor(model => Model.Order.Order_Value)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Orders)
+            {
+                <tr class="text-dark">
+                    <td>#@Html.DisplayFor(modelItem => item.Order_Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Order_Date)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Customer.FullName)</td>
+                    @{ 
+                        var paid = (item.Payment_Status > 0) ? "Paid" : "Unpaid";
+                    }
+                    <td>@paid</td>
+                    <td>$@Html.DisplayFor(modelItem => item.Order_Value)</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

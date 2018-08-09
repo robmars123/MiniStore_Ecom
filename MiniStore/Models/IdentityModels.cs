@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Business.Entities;
@@ -24,6 +25,7 @@ namespace MiniStore.Models
         public ApplicationDbContext()
             : base("DataContext", throwIfV1Schema: false)
         {
+
         }
 
         public static ApplicationDbContext Create()

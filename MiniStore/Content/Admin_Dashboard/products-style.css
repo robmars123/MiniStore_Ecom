@@ -1,0 +1,10 @@
+﻿.clickable-row{
+    cursor: pointer;
+}
+
+.clickable-row a{
+    color:  dodgerblue;
+}
+.clickable-row a:hover{
+    color: dodgerblue;
+}

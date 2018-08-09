@@ -26,5 +26,15 @@ namespace Business.Entities
         public virtual Product Product { get; set; }
         public string User_Id { get; set; }
         public int Status { get; set; }
+
+        [NotMapped]
+        public decimal? PriceTotal
+        {
+            get
+            {
+                decimal? _calculatedPrice = (Quantity > 1) ? UnitPrice * Quantity : UnitPrice;
+                return _calculatedPrice;
+            }
+        }
     }
 }

@@ -11,5 +11,7 @@ namespace Business.ViewModels
         public Cart Cart { get; set; }
         public ProductImage PrimaryProduct_Image { get; set; }
         public List<Cart> CartProducts { get; set; }
+
+        public decimal? CalculatedPrice { get; set; }
     }
 }

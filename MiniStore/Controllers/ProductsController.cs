@@ -86,11 +86,12 @@ namespace MiniStore.Controllers
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
-            var product = _productDataSerice.GetProductDetails(id);
-
-            ViewBag.SubCategories = new SelectList(_productDataSerice.GetSubCategories(), "Subcategory_Id", "Subcategory_Name", product.Subcategory_Id);
+            _productList.Product = _productDataSerice.GetProductDetails(id);
+            _productList.PrimaryProduct_Image = _productDataSerice.GetImages((int)id).FirstOrDefault();
+            _productList.Product.productImages = _productDataSerice.GetImages((int)id);
+            ViewBag.SubCategories = new SelectList(_productDataSerice.GetSubCategories(), "Subcategory_Id", "Subcategory_Name", _productList.Product.Subcategory_Id);
             ViewBag.Categories = new SelectList(_productDataSerice.GetCategories(), "Category_Id", "Category_Name", "Category_Id");
-            return View(product);
+            return View(_productList);
         }
 
         [HttpPost]
@@ -100,15 +101,16 @@ namespace MiniStore.Controllers
             if (ModelState.IsValid)
             {
                 string imageCode = "";
+                img.Product_Id = product.Product_Id;
                 if(file != null) FileUpload(img, file);
                 _productDataSerice.UpdateProduct(product);
                 _productDataSerice.GetImages(product.Product_Id);
-
+                _productList.Product = product;
                 ViewBag.SubCategories = new SelectList(_productDataSerice.GetSubCategories(), "Subcategory_Id", "Subcategory_Name", product.Subcategory_Id);
                 ViewBag.Categories = new SelectList(_productDataSerice.GetCategories(), "Category_Id", "Category_Name", product.Category_Id);
                 return RedirectToAction("Details", "Products", new { id = product.Product_Id });
             }
-            return View(product);
+            return View(_productList);
         }
 
         // GET: Products/Delete/5

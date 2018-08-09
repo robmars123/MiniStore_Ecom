@@ -1,3 +1,4 @@
+using Business.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +20,7 @@ namespace Business.Entities
         public string Product_Name { get; set; }
 
         public decimal? Price { get; set; }
-
+        [DisplayName("Type")]
         public int? Category_Id { get; set; }
 
         public int? Subcategory_Id { get; set; }
@@ -33,6 +34,7 @@ namespace Business.Entities
         public string Description { get; set; }
         [DisplayName("Quantity Per Unit")]
         public int? QuantityPerUnit { get; set; }
+  
 
         [Column(TypeName = "date")]
         public DateTime? Date_Removed { get; set; }
