@@ -11,7 +11,8 @@ namespace Business.ViewModels
         public Order Order { get; set; }
         public Product Product { get; set; }
         public List<Order> Orders { get;set; }
-        public List<Product> Products { get; set; }
+        public List<Product> productList { get; set; }
+        public ProductImage PrimaryProduct_Image { get; set; }
         public int OrderCount { get; set; }
         public decimal Total { get; set; }
     }

@@ -29,3 +29,14 @@
 .product-image{
     width: 150px;
 }
+
+.product-text {
+    font-family: Arial;
+    font-size: 13px;
+    /*color: #009ED9;*/
+    display: table-cell;
+    padding: 30px;
+    vertical-align: middle;
+    position: relative;
+    /*right: 30%;*/
+}

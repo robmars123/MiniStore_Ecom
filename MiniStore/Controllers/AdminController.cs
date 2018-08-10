@@ -31,8 +31,17 @@ namespace MiniStore.Controllers
         }
         public ActionResult Products()
         {
-            _adminViewModel.Products = _adminDataService.GetProducts();
+            _adminViewModel.productList = _adminDataService.GetProducts();
+            //Get product primary image
+            PrimaryProductImage(_adminViewModel);
             return View(_adminViewModel);
+        }
+        //For Details Page Only - loop through each product and get their primary image
+        private void PrimaryProductImage(AdminViewModel _productList)
+        {
+            _productList.productList.ForEach(item =>
+           _productList.PrimaryProduct_Image = _adminDataService.GetImages(item.Product_Id).FirstOrDefault()
+           );
         }
     }
 }
