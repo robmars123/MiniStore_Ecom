@@ -410,6 +410,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\logo hinley.PNG" />
     <Content Include="Images\paypal button.png" />
     <Content Include="Scripts\admin-dashboard.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />

@@ -17,12 +17,13 @@ namespace Business.Entities
         public int Product_Id { get; set; }
 
         [StringLength(50)]
+        [DisplayName("Product")]
         public string Product_Name { get; set; }
 
         public decimal? Price { get; set; }
         [DisplayName("Type")]
         public int? Category_Id { get; set; }
-
+        [DisplayName("Subcategory")]
         public int? Subcategory_Id { get; set; }
 
         [Column(TypeName = "date")]

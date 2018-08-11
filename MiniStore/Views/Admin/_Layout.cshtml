@@ -6,13 +6,13 @@
     <title>Dashboard</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/Admin_Dashboard/products-style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    
+
 </head>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 <link href="~/Content/Admin_Dashboard/admin-dashboard.css" rel="stylesheet" />
@@ -23,7 +23,9 @@
         <a class="mr-1 d-md-none text-light" href="#sidenav" data-toggle="collapse" data-target="#sidenav">
             <span data-feather="menu" class="my-1"></span>
         </a>
-        <a class="text-light" href="">Hinley's</a>
+        <a class="text-light h3" href="">
+            Hinley's
+        </a>
         <a class="navbar-toggler border-0 p-0" href="#topnav" data-toggle="collapse" data-target="#topnav">
             <span data-feather="menu" class="my-1"></span>
         </a>
@@ -37,14 +39,18 @@
         </ul>
     </div>
 </nav>
-<div class="container-fluid">
+<div class="clearfix"></div>
+<div class="container-fluid pt-2">
     <div class="row navbar-expand-md">
         <nav class="col-md-3 col-lg-2 bg-light navbar-collapse collapse sidebar" id="sidenav">
-            <div class="sidebar-sticky flex-column w-100 mt-1">
+            <div class="sidebar-sticky flex-column w-100 mt-1 pt-4">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="~/Admin/Dashboard">
+                        <a class="nav-link active d-inline" href="~/Admin/Dashboard">
                             <span data-feather="home"></span> Dashboard <span class="sr-only">(current)</span>
+                        </a>
+                        <a class="mr-3 mt-1 active d-inline float-right" href="~/Products">
+                            <span class="fa fa-eye text-secondary"></span>
                         </a>
                     </li>
                     <li class="nav-item">
