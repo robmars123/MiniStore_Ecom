@@ -12,11 +12,18 @@ namespace MiniStore.Controllers
     public class AdminController : Controller
     {
         private AdminDataService _adminDataService = new AdminDataService();
+        private CustomerDataService _customerDataService = new CustomerDataService();
         private AdminViewModel _adminViewModel = new AdminViewModel();
+        private CustomerViewModel _customerViewModel = new CustomerViewModel();
         // GET: Admin
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Dashboard");
+        }
+        public ActionResult Customers()
+        {
+            _customerViewModel.CustomerList = CustomerDataService.GetCustomers();
+            return View(_customerViewModel);
         }
         public ActionResult Dashboard()
         {

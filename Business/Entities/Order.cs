@@ -23,7 +23,7 @@ namespace Business.Entities
         public int PostalCode { get; set; }
         public string State { get; set; }
         [DisplayName("Total")]
-        public string Order_Value { get; set; }
+        public decimal Order_Value { get; set; }
         public string Other_Details { get; set; }
         [DisplayName("Date")]
         public string Order_Date { get; set; }

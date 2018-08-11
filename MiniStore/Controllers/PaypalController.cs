@@ -21,7 +21,5 @@ namespace MiniStore.Controllers
         {
             return View(db.Customers.ToList());
         }
-
-        
     }
 }

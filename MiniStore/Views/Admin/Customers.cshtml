@@ -1,0 +1,22 @@
+﻿@model Business.ViewModels.CustomerViewModel
+@{
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+
+<div>
+    <h4>Customers</h4>
+    <section class="container rounded border border-top-0">
+        <div class="row"></div>
+        @foreach (var item in Model.CustomerList)
+        {
+            <div class="rounded">
+                <div class="row  p-3 border-top rounded">
+                    <div class="col ">@Html.DisplayFor(modelItem => item.FullName)</div>
+                    <div class="col text-center">@Html.DisplayFor(modelItem => item.Orders.Count)</div>
+                    <div class="col text-right">@Html.DisplayFor(modelItem => item.TotalSpent) spent</div>
+                </div>
+            </div>
+        }
+        <div class="row border-top rounded"></div>
+    </section>
+</div>

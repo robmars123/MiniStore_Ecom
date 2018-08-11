@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Business.Data;
 using Business.DataService;
 using Business.Entities;
 using Business.Enums;
@@ -17,7 +18,7 @@ using PayPal.Api;
 
 namespace Business.DataService
 {
-    public class PaymentDataService
+    public class PaymentDataService : BaseContext
     {
         private APIContext apiContext = Configuration.GetAPIContext();
         private static CartDataService _cartDataService = new CartDataService();
@@ -58,7 +59,7 @@ namespace Business.DataService
             order.Payment_Status = (int)Payment_Status.Paid;
             foreach (var item in executedPayment.transactions)
             {
-                order.Order_Value = item.amount.total;
+                order.Order_Value = Convert.ToDecimal(item.amount.total);
             }
             //Add more info if needed
 

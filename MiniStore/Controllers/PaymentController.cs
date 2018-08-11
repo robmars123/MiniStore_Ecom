@@ -17,17 +17,5 @@ namespace MiniStore.Controllers
         {
             return View(db.Customers.ToList());
         }
-
-        
-        
-        //private APIContext GetAPIContext()
-        //{
-        //    // Authenticate with PayPal
-        //    var config = ConfigManager.Instance.GetProperties();
-        //    var accessToken = new OAuthTokenCredential(config).GetAccessToken();
-        //    var apiContext = new APIContext(accessToken);
-        //    return apiContext;
-        //}
-        
     }
 }

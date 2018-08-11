@@ -3,20 +3,20 @@
     Layout = "~/Views/Admin/_Layout.cshtml";
 }
 <link href="~/Content/products-content/product-page.css" rel="stylesheet" />
-<div class="container table-responsive-lg">
-    <table class="table table-borderless">
+<div class="container table-responsive-lg rounded border pl-2 pr-2">
+    <table class="container-fluid table table-borderless mb-0 flex-wrap">
         <thead>
-            <tr class="row">
-                <th class="w-25"></th>
-                <th class="w-50"><span class="product-text">@Html.DisplayNameFor(model => Model.Product.Product_Name)</span></th>
-                <th class=""><span class="product-text">@Html.DisplayNameFor(model => Model.Product.Category_Id)</span></th>
+            <tr class="h-50">
+                <th class="w-25 col"></th>
+                <th class="w-50 col"><span >@Html.DisplayNameFor(model => Model.Product.Product_Name)</span></th>
+                <th class="col"><span >@Html.DisplayNameFor(model => Model.Product.Category_Id)</span></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="container">
             @foreach (var item in Model.productList)
             {
-                <tr class="text-dark clickable-row row" data-href="@Url.Action("Details", "Products", new { id = item.Product_Id})">
-                    <td class="w-25">
+                <tr class="text-dark clickable-row border-top pl-2 pr-2" data-href="@Url.Action("Details", "Products", new { id = item.Product_Id})">
+                    <td class="w-25 col align-middle">
 
                         @if (item.productImages.Count != 0)
                         {
@@ -25,20 +25,19 @@
                                 var index = image.i;
                                 if (index == 0)
                                 {
-                                    <img src="@image.value.ConvertedProductImage" style="max-width: 100px; max-height: 100px;display: inline-block;" id="myImg" />
+                                    <img src="@image.value.ConvertedProductImage" style="width: 80px; height: 60px; display: inline-block;" id="myImg" />
                                 }
                             }
                         }
                     </td>
-                    <td class="w-50 d-flex">
-                        <a class="product-text" href="@Url.Action("Details", "Products", new { id = item.Product_Id})">
+                    <td class="w-50 col align-middle">
+                        <a class="" href="@Url.Action("Details", "Products", new { id = item.Product_Id})">
                             @Html.DisplayFor(modelItem => item.Product_Name)
                         </a>
                     </td>
-                    <td class=""><span class="product-text">@Html.DisplayFor(modelItem => item.Categories.Category_Name, new { @class = "" })</span></td>
+                    <td class="col align-middle"><span class="">@Html.DisplayFor(modelItem => item.Categories.Category_Name, new { @class = "" })</span></td>
                 </tr>
             }
-
         </tbody>
     </table>
 </div>

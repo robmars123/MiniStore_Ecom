@@ -28,5 +28,9 @@ namespace Business.Entities
                 return First_Name + " " + Last_Name;
             }
         }
+        public virtual ICollection<Order> Orders { get; set; }
+        [NotMapped]
+        [DataType(DataType.Currency)]
+        public decimal TotalSpent { get; set; }
     }
 }
