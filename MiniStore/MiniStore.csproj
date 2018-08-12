@@ -410,8 +410,15 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\chicago.jpg" />
+    <Content Include="Images\la.jpg" />
     <Content Include="Images\logo hinley.PNG" />
+    <Content Include="Images\ny.jpg" />
     <Content Include="Images\paypal button.png" />
+    <Content Include="Images\watch1.jpg" />
+    <Content Include="Images\watch1.png" />
+    <Content Include="Images\watch2.png" />
+    <Content Include="Images\Watch3.png" />
     <Content Include="Scripts\admin-dashboard.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

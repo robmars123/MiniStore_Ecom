@@ -3,41 +3,46 @@
     Layout = "~/Views/Admin/_Layout.cshtml";
 }
 <link href="~/Content/products-content/product-page.css" rel="stylesheet" />
-<div class="container table-responsive-lg rounded border pl-2 pr-2">
-    <table class="container-fluid table table-borderless mb-0 flex-wrap">
-        <thead>
-            <tr scope="col" class="tbl-header">
-                <th class="w-25 col"></th>
-                <th class="w-50 col"><span >@Html.DisplayNameFor(model => Model.Product.Product_Name)</span></th>
-                <th class="col"><span >@Html.DisplayNameFor(model => Model.Product.Category_Id)</span></th>
-            </tr>
-        </thead>
-        <tbody class="container">
-            @foreach (var item in Model.productList)
-            {
-                <tr class="text-dark clickable-row border-top pl-2 pr-2" data-href="@Url.Action("Details", "Products", new { id = item.Product_Id})">
-                    <td class="w-25 col align-middle">
+<div class="container">
+    @Html.ActionLink("Add product", "Create", null, new { @class = "btn btn-info col-md-2 mb-1" })
 
-                        @if (item.productImages.Count != 0)
-                        {
-                            foreach (var image in item.productImages.Select((value, i) => new { i, value }))
+
+    <div class="container table-responsive-lg rounded border pl-2 pr-2">
+        <table class="container-fluid table table-borderless mb-0 flex-wrap">
+            <thead>
+                <tr scope="col" class="tbl-header">
+                    <th class="w-25 col"></th>
+                    <th class="w-50 col"><span>@Html.DisplayNameFor(model => Model.Product.Product_Name)</span></th>
+                    <th class="col"><span>@Html.DisplayNameFor(model => Model.Product.Category_Id)</span></th>
+                </tr>
+            </thead>
+            <tbody class="container">
+                @foreach (var item in Model.productList)
+                {
+                    <tr class="text-dark clickable-row border-top pl-2 pr-2" data-href="@Url.Action("Details", "Products", new { id = item.Product_Id})">
+                        <td class="w-25 col align-middle">
+
+                            @if (item.productImages.Count != 0)
                             {
-                                var index = image.i;
-                                if (index == 0)
+                                foreach (var image in item.productImages.Select((value, i) => new { i, value }))
                                 {
-                                    <img src="@image.value.ConvertedProductImage" style="width: 80px; height: 60px; display: inline-block;" id="myImg" />
+                                    var index = image.i;
+                                    if (index == 0)
+                                    {
+                                        <img src="@image.value.ConvertedProductImage" style="width: 80px; height: 60px; display: inline-block;" id="myImg" />
+                                    }
                                 }
                             }
-                        }
-                    </td>
-                    <td class="w-50 col align-middle">
-                        <a class="" href="@Url.Action("Details", "Products", new { id = item.Product_Id})">
-                            @Html.DisplayFor(modelItem => item.Product_Name)
-                        </a>
-                    </td>
-                    <td class="col align-middle"><span class="">@Html.DisplayFor(modelItem => item.Categories.Category_Name, new { @class = "" })</span></td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                        </td>
+                        <td class="w-50 col align-middle">
+                            <a class="" href="@Url.Action("Details", "Products", new { id = item.Product_Id})">
+                                @Html.DisplayFor(modelItem => item.Product_Name)
+                            </a>
+                        </td>
+                        <td class="col align-middle"><span class="">@Html.DisplayFor(modelItem => item.Categories.Category_Name, new { @class = "" })</span></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

@@ -3,20 +3,42 @@
 @{
     ViewBag.Title = "Index";
 }
-<head>
-
-</head>
-<h2>All Products</h2>
-
-@if (Request.IsAuthenticated)
-{
-    @Html.ActionLink("Add product", "Create", null, new { @class = "btn btn-info col-md-2 mb-1" })
-}
+<link href="~/Content/products-content/product-page.css" rel="stylesheet" />
 <br style="clear:both" />
 <body>
+    <div id="demo" class="carousel slide" data-ride="carousel">
+
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+
+        <!-- The slideshow -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/Images/watch1.png" alt="Los Angeles" class="carousel-img">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Images/watch2.png" alt="Chicago" class="carousel-img">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Images/Watch3.png" alt="New York" class="carousel-img">
+            </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev text-black-50" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next text-black-50" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
     <div class="container">
-        <div class="row">
-            <div class="row">
+        <div>
+            <div class="row p-5">
                 @foreach (var item in Model.productList)
                 {
                     <div class="col-md-3 col-sm-3 col-xs-12 image-main-section">
