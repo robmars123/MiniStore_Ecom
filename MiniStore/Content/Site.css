@@ -44,3 +44,28 @@ textarea {
 .no-bullets {
     list-style-type: none;
 }
+
+.fa-search{
+    color: white;
+    font-size: 20px !important;
+}
+
+.fa-search:hover{
+    cursor: pointer;
+}
+.search-bar {
+    float: right;
+    overflow: hidden;
+    height: 40px;
+    /*display: none !important;*/
+}
+.fa-user{
+    font-size: 20px !important;
+}
+.fa-user:hover {
+    cursor: pointer;
+}
+
+.fa-shopping-cart{
+    font-size: 20px !important;
+}
