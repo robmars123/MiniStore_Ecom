@@ -92,10 +92,11 @@
                 </div>
             </div>
         </div>*@
-    <div class="container body-content h-50">
-        @RenderBody()
-        <hr />
-        <footer>
+    <div class="container body-content container-main">
+        @RenderBody()       
+    </div>
+    <div class="footer navbar-fixed-bottom footer-no-nav">
+        <footer class="text-center">
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>

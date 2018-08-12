@@ -7,13 +7,18 @@ body, html {
     padding-left: 15px;
     padding-right: 15px;
 }
-
-/* Override the default bootstrap behavior where horizontal description lists 
+    .body-content a{
+        color: #262626;
+    }
+    .body-content a:hover{
+        color: black !important;
+    }
+    /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
-.dl-horizontal dt {
-    white-space: normal;
-}
+    .dl-horizontal dt {
+        white-space: normal;
+    }
 
 /* Set width on the form input elements since they're 100% wide by default */
 /*input,
@@ -68,4 +73,29 @@ textarea {
 
 .fa-shopping-cart{
     font-size: 20px !important;
+}
+
+.email-box{
+    height: 40px;
+}
+.password-box{
+    height: 40px;
+}
+
+.container-main:after {
+    min-height: 80%;
+    position: fixed;
+    display: block;
+}
+
+.footer-no-nav {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 40px;
+    margin: 55px;
+}
+
+.card, .btn, .form-control {
+    border-radius: 0;
 }

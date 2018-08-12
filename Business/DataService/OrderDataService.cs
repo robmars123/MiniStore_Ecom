@@ -14,5 +14,10 @@ namespace Business.DataService
             db.Orders.Add(order);
             db.SaveChanges();
         }
+        public static List<Order> UserOrders(string userId)
+        {
+            var orders = db.Orders.Where(x => x.Customer.User_Id == userId).ToList();
+            return orders;
+        }
     }
 }

@@ -2,86 +2,49 @@
 @{
     ViewBag.Title = "Manage";
 }
-
-<h2>@ViewBag.Title.</h2>
-
 <p class="text-success">@ViewBag.StatusMessage</p>
-<div>
-    <h4>Change your account settings</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>Password:</dt>
-        <dd>
-            [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Change your password", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
-            ]
-        </dd>
-        <dt>External Logins:</dt>
-        <dd>
-            @Model.Logins.Count [
-            @Html.ActionLink("Manage", "ManageLogins") ]
-        </dd>
-        @*
-            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-             
-             See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-             
-             Uncomment the following block after you have set up two-factor authentication
-        *@
-        @*  
-            <dt>Phone Number:</dt>
-            <dd>
-                @(Model.PhoneNumber ?? "None")
-                @if (Model.PhoneNumber != null)
-                {
-                    <br />
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
-                    }
-                }
-                else
-                {
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
-                }
-            </dd>
-        *@
-        <dt>Two-Factor Authentication:</dt>
-        <dd>
-            <p>
-                There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication.
-            </p>
-            @*@if (Model.TwoFactor)
-                {
-                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Enabled
-                        <input type="submit" value="Disable" class="btn btn-link" />
-                        </text>
-                    }
-                }
-                else
-                {
-                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Disabled
-                        <input type="submit" value="Enable" class="btn btn-link" />
-                        </text>
-                    }
-                }*@
-        </dd>
-    </dl>
+<div class="container-fluid mt-lg-5 mb-lg-5">
+    <h3 class="text-center mb-lg-4">My Account</h3>
+    <h6 class="text-center"><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></h6>
+    <div class="row mt-lg-5">
+        <div class="col  col-md-8">
+            <h4>Order History</h4>
+            <div>
+                <table class="table table-borderless table-responsive-lg">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => Model.Order.Order_Id)</th>
+                            <th>@Html.DisplayNameFor(model => Model.Order.Order_Date)</th>
+                            <th>@Html.DisplayNameFor(model => Model.Order.Customer.FullName)</th>
+                            <th>@Html.DisplayNameFor(model => Model.Order.Payment_Status)</th>
+                            <th>@Html.DisplayNameFor(model => Model.Order.Order_Value)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Orders)
+                        {
+                            <tr class="text-dark">
+                                <td>#@Html.DisplayFor(modelItem => item.Order_Id)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Order_Date)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Customer.FullName)</td>
+                                @{
+                                    var paid = (item.Payment_Status > 0) ? "Paid" : "Unpaid";
+                                }
+                                <td>@paid</td>
+                                <td>$@Html.DisplayFor(modelItem => item.Order_Value)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col">
+            <h4>Account Details</h4>
+            <div class="text-dark border p-3 mt-5">
+                <p>@Model.CustomerAccountInfo.FullName</p>
+                <p>@Model.CustomerAccountInfo.Address</p>
+            </div>
+        </div>
+    </div>
+
 </div>

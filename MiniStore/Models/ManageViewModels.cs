@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Business.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
@@ -12,6 +13,10 @@ namespace MiniStore.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+
+        public Order Order { get; set; }
+        public List<Order> Orders { get; set; }
+        public Customer CustomerAccountInfo { get; set; }
     }
 
     public class ManageLoginsViewModel
