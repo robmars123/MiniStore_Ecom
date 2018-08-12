@@ -19,7 +19,7 @@ namespace Business.Entities
         [StringLength(50)]
         [DisplayName("Product")]
         public string Product_Name { get; set; }
-
+        [DataType(DataType.Currency)]
         public decimal? Price { get; set; }
         [DisplayName("Type")]
         public int? Category_Id { get; set; }

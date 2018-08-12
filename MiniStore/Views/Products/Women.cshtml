@@ -3,20 +3,20 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<link href="~/Content/products-content/product-page.css" rel="stylesheet" />
 <h2>Women's Apparel</h2>
 
 <br style="clear:both" />
 
 <div class="container">
-    <div class="row">
-        <div class="row">
+    <div>
+        <div class="row p-5">
             @foreach (var item in Model.productList)
             {
                 <div class="col-md-3 col-sm-3 col-xs-12 image-main-section">
                     <a href="@Url.Action("Details", "Products", new { id = item.Product_Id})">
-                        <div class="row img-part">
-                            <div class="">
+                        <div class="row img-part text-center">
+                            <div class="m-auto product-box">
                                 @if (item.productImages.Count != 0)
                                 {
                                     foreach (var image in item.productImages.Select((value, i) => new { i, value }))
@@ -24,24 +24,17 @@
                                         var index = image.i;
                                         if (index == 0)
                                         {
-                                            <img src="@image.value.ConvertedProductImage" style="max-width: 150px; max-height: 200px;display: inline-block;" id="myImg" />
+                                            <img src="@image.value.ConvertedProductImage" style="max-width: 150px; max-height: 200px;display: inline-block;" id="myImg" class="pt-4 pb-4" />
                                         }
                                     }
-
-                                    //string imreBase64Data = Convert.ToBase64String(item.productImage.Image);
-                                    //var imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
-                                    @*<img src="@imgDataURL" style="max-width: 150px; max-height: 200px;" id="myImg" />*@
                                 }
                             </div>
-                            <div class="col-md-12 col-sm-12 col-xs-12 image-title">
-                                <h3>@Html.DisplayFor(model => item.Product_Name)</h3>
+                            <div class="col-md-12 col-sm-12 col-xs-12 image-title  font-weight-bold">
+                                <span>@Html.DisplayFor(model => item.Product_Name)</span>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-xs-12 image-description">
+                            <div class="col-md-12 col-sm-12 col-xs-12 image-description font-weight-bold">
                                 <p>@Html.DisplayFor(model => item.Price)</p>
                             </div>
-                            @*<div class="col-md-12 col-sm-12 col-xs-12">
-                                    <a href="#" class="btn btn-success add-cart-btn">ADD TO CART</a>
-                                </div>*@
                         </div>
                     </a>
                 </div>
